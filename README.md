@@ -87,14 +87,3 @@ All provider API calls and database operations are non-blocking. A single uvicor
 
 ---
 
-## 4. What I'd Build Next
-
-- **Credit threshold alerts**: Celery task that emails/Slacks on-call when `credits_remaining` drops below a configurable threshold per provider. Critical for preventing pipeline outages at Adam's AI.
-
-- **Per-tenant multi-provider support**: Adam's AI serves multiple business clients. The schema would gain a `tenant_id` column; the API would scope all queries by tenant; adapters would accept per-tenant credentials from a secrets store.
-
-- **Cost forecasting**: Linear regression over the last 7-day snapshot history to predict when credits will run out. Surfaced as a "days remaining" figure in the CreditCard component.
-
-- **OAuth login + API key management UI**: Secure the dashboard behind Google/GitHub OAuth; let admins rotate provider API keys from the UI instead of editing Kubernetes secrets manually.
-
-- **Sarvam AI adapter**: Sarvam AI is an Indian STT/TTS provider directly relevant to Adam's AI's voice pipeline. Adding it is a single new file (`backend/app/adapters/sarvam.py`) implementing `BaseAdapter` — the adapter pattern was chosen specifically to make this trivial.
